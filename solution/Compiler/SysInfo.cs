@@ -1,6 +1,4 @@
 using System;
-using System.Windows.Forms;
-
 namespace ETH.Zonnon.Compiler
 {
 	public class SysInfo

@@ -156,11 +156,13 @@ public class Tester
         // and then process the compilation/execution results,
         // and finally create the TestResult instance.
         options.ReferencedAssemblies.Clear();
-        string mscorlibLocation = typeof(System.Console).Assembly.Location;
-        string systemLocation = typeof(System.CodeDom.Compiler.CodeCompiler).Assembly.Location;
+        string coreLibraryLocation = typeof(object).Assembly.Location;
+        string consoleLocation = typeof(System.Console).Assembly.Location;
+        string codeDomLocation = typeof(System.CodeDom.Compiler.CodeCompiler).Assembly.Location;
         string rtlLocation = typeof(Zonnon.RTL.CommonException).Assembly.Location;
-        options.ReferencedAssemblies.Add(mscorlibLocation);
-        options.ReferencedAssemblies.Add(systemLocation);
+        options.ReferencedAssemblies.Add(coreLibraryLocation);
+        options.ReferencedAssemblies.Add(consoleLocation);
+        options.ReferencedAssemblies.Add(codeDomLocation);
         options.ReferencedAssemblies.Add(rtlLocation); // "Zonnon.RTL.dll");
 
 
@@ -201,8 +203,9 @@ public class Tester
             {
                 case "setref":
                     options.ReferencedAssemblies.Clear();
-                    options.ReferencedAssemblies.Add(mscorlibLocation);
-                    options.ReferencedAssemblies.Add(systemLocation);
+                    options.ReferencedAssemblies.Add(coreLibraryLocation);
+                    options.ReferencedAssemblies.Add(consoleLocation);
+                    options.ReferencedAssemblies.Add(codeDomLocation);
                     options.ReferencedAssemblies.Add(rtlLocation); // "Zonnon.RTL.dll");
 
                     Console.WriteLine("References cleared");
@@ -786,11 +789,13 @@ public class Tester
         options.MainModule = "Main";
         options.EmbeddedDialogue = false;
 
-        string mscorlibLocation = typeof(System.Console).Assembly.Location;
-        string systemLocation   = typeof(System.CodeDom.Compiler.CodeCompiler).Assembly.Location;
+        string coreLibraryLocation = typeof(object).Assembly.Location;
+        string consoleLocation = typeof(System.Console).Assembly.Location;
+        string codeDomLocation = typeof(System.CodeDom.Compiler.CodeCompiler).Assembly.Location;
         string rtlLocation = typeof(Zonnon.RTL.CommonException).Assembly.Location;
-        options.ReferencedAssemblies.Add(mscorlibLocation);
-        options.ReferencedAssemblies.Add(systemLocation);
+        options.ReferencedAssemblies.Add(coreLibraryLocation);
+        options.ReferencedAssemblies.Add(consoleLocation);
+        options.ReferencedAssemblies.Add(codeDomLocation);
         options.ReferencedAssemblies.Add(rtlLocation); //"Zonnon.RTL.dll");
 
      // options.Debug = true;

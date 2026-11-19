@@ -678,6 +678,7 @@ namespace Zonnon.RTL
     //ZonnonAttribute q = p[0] as ZonnonAttribute;        
     //Console.WriteLine(q.Data);
 
+    [AttributeUsage(AttributeTargets.All)]
     public class ZonnonAttribute : Attribute
     {
         private string data;

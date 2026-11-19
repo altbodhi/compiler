@@ -590,16 +590,19 @@ public class CommandLineCompiler
      // string systemDirectory   = AssemblyNode.GetAssembly(typeof(System.CodeDom.Compiler.CodeCompiler).Assembly).Directory;
      // string mscorlibDirectory = AssemblyNode.GetAssembly(typeof(System.Console).Assembly).Directory;
 
-		string mscorlibLocation = typeof(System.Console).Assembly.Location;
-		string systemLocation   = typeof(System.CodeDom.Compiler.CodeCompiler).Assembly.Location;
+		string coreLibraryLocation = typeof(object).Assembly.Location;
+		string consoleLocation     = typeof(System.Console).Assembly.Location;
+		string codeDomLocation     = typeof(System.CodeDom.Compiler.CodeCompiler).Assembly.Location;
 		string rtlLocation      = typeof(Zonnon.RTL.CommonException).Assembly.Location;
 #if TRACE	  
-		System.Console.WriteLine("PASS mscorlibLocation = {0}", mscorlibLocation);
-		System.Console.WriteLine("PASS systemLocation = {0}", systemLocation);
+		System.Console.WriteLine("PASS coreLibraryLocation = {0}", coreLibraryLocation);
+		System.Console.WriteLine("PASS consoleLocation = {0}", consoleLocation);
+		System.Console.WriteLine("PASS codeDomLocation = {0}", codeDomLocation);
 		System.Console.WriteLine("PASS rtlLocation = {0}", rtlLocation);
 #endif
-		options.ReferencedAssemblies.Add(mscorlibLocation);
-		options.ReferencedAssemblies.Add(systemLocation);
+		options.ReferencedAssemblies.Add(coreLibraryLocation);
+		options.ReferencedAssemblies.Add(consoleLocation);
+		options.ReferencedAssemblies.Add(codeDomLocation);
 		options.ReferencedAssemblies.Add(rtlLocation); // "Zonnon.RTL.dll");
 
         options.OutputAssembly = options.Output;

@@ -182,7 +182,8 @@ namespace ETH.Zonnon
 
             rtlName = new QualifiedIdentifier(Identifier.For("Zonnon"),Identifier.For("RTL"));
 
-            system      = AssemblyNode.GetAssembly(typeof(System.Console).Assembly);
+            system      = AssemblyNode.GetAssembly(typeof(object).Assembly);
+            AssemblyNode consoleAssembly = AssemblyNode.GetAssembly(typeof(System.Console).Assembly);
             rtlAssembly = AssemblyNode.GetAssembly(typeof(ZonnonHalt).Assembly);
             Identifier system_id = Identifier.For("System");
 
@@ -202,7 +203,7 @@ namespace ETH.Zonnon
             Ranges        = rtlAssembly.GetType(rtl_id, Identifier.For("Range")); 
             Output        = rtlAssembly.GetType(rtl_id,Identifier.For("Output"));
             Input         = rtlAssembly.GetType(rtl_id,Identifier.For("Input"));
-            Console       =      system.GetType(Identifier.For("System"),Identifier.For("Console"));
+            Console       = consoleAssembly.GetType(Identifier.For("System"),Identifier.For("Console"));
             Array         =      system.GetType(Identifier.For("System"), Identifier.For("Array"));
             systemMath    =      system.GetType(Identifier.For("System"), Identifier.For("Math"));
             ObjectLock    = rtlAssembly.GetType(rtl_id, Identifier.For("ObjectLock"));
@@ -3626,7 +3627,7 @@ namespace ETH.Zonnon
             AssemblyNode system = AssemblyNode.GetAssembly(typeof(System.Threading.Monitor).Assembly);
             TypeNode monitor = system.GetType(Identifier.For("System.Threading"), Identifier.For("Monitor"));
 
-            TypeNode typenode = system.GetType(Identifier.For("System"), Identifier.For("Console"));
+            TypeNode typenode = Console;
             UnaryExpression ldtoken = new UnaryExpression(new Literal(typenode, SystemTypes.RuntimeTypeHandle), NodeType.Ldtoken, SystemTypes.IntPtr);
             MethodCall type_of = new MethodCall(new MemberBinding(null, Runtime.GetTypeFromHandle), new ExpressionList(ldtoken), NodeType.Call, SystemTypes.Type);
             

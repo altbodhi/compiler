@@ -114,6 +114,27 @@ namespace ETH.Zonnon
 
         //---------------------------------------------------------------------------------
 
+        public override void SaveOrLoadAssembly(
+            AssemblyNode assembly,
+            System.CodeDom.Compiler.CompilerParameters compilerParameters,
+            CompilerResults results,
+            ErrorNodeList errorNodes)
+        {
+            // The bundled CCI's in-memory path reads CompilerParameters.Evidence, which was removed
+            // from System.CodeDom on modern .NET. This compiler emits output files, so write directly.
+            compilerParameters.GenerateInMemory = false;
+
+            string outputFileName = GetTargetFileName(compilerParameters, errorNodes);
+            AddResourcesAndIcons(assembly, compilerParameters, errorNodes);
+            ProcessErrors(compilerParameters, results, errorNodes);
+
+            if (results.Errors.HasErrors)
+                return;
+
+            assembly.WriteModule(outputFileName, compilerParameters);
+            results.PathToAssembly = outputFileName;
+        }
+
         public override Compilation CreateCompilation(Module targetModule, CompilationUnitList compilationUnits, CompilerParameters compilerParameters, Scope globalScope)
         {
             return new ZonnonCompilation(targetModule, compilationUnits, compilerParameters, globalScope);
